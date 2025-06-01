@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script>
+        (function () {
+            let savedTheme = localStorage.getItem("theme") || "auto";
+            if (savedTheme === "auto") {
+                savedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", savedTheme);
+            document.documentElement.classList.toggle("dark-mode", savedTheme === "dark");
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            background-color: #0D6EFDB3;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .dark-mode {
+            background-color: #181818 !important;
+            color: #ffffff !important;
+        }
+
+        .bg {
+            background-image: url("{% static 'app2/images/laboratorio_login_izquierda.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .dark-mode label,
+        .dark-mode .form-label {
+            color: #ffffff !important;
+            /* Hace que los labels sean blancos */
+        }
+
+        .dark-mode body {
+            background-color: #181818 !important;
+            /* Fondo realmente oscuro */
+        }
+
+        .dark-mode .bg-light {
+            background-color: #343a40 !important;
+            /* Hace que los contenedores no se vean azules */
+        }
+
+        .dark-mode span,
+        .dark-mode a {
+            color: #ffffff !important;
+            /* Corrige el color del texto y enlaces */
+        }
+
+        .dark-mode .btn {
+            background-color: #007bff !important;
+            /* Mantiene el botón visible */
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="register" class="container w-75 bg-light mt-5 rounded shadow mb-6">
+        <div class="row align-items-lg-stretch">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6"></div>
+            <div class="col p-1 rounded-end">
+                <div class="text-end">
+                    <a href="{% url 'inicio' %}">
+                        <img src="{% static 'app2/images/logo.png' %}" width="148" alt="Logo">
+                    </a>
+                </div>
+                <h2 class="fw-bold text-center py-5">REGÍSTRATE</h2>
+
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="first_name" class="form-label">Nombre</label>
+                        <input type="text" name="first_name" class="form-control rounded-3 shadow-sm"
+                            placeholder="Escribe tu nombre">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="last_name" class="form-label">Apellido</label>
+                        <input type="text" name="last_name" class="form-control rounded-3 shadow-sm"
+                            placeholder="Escribe tu apellido">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" name="email" class="form-control rounded-3 shadow-sm"
+                            placeholder="Escribe tu correo">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password1" class="form-label">Contraseña</label>
+                        <input type="password" name="password1" class="form-control rounded-3 shadow-sm"
+                            placeholder="Crea una contraseña">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password2" class="form-label">Confirmar contraseña</label>
+                        <input type="password" name="password2" class="form-control rounded-3 shadow-sm"
+                            placeholder="Confirma tu contraseña">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                    </div>
+                    <span>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></span>
+                </form>
+                <div class="my-3">
+                </div>
+                <div class="my-3">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown position-fixed z-3 bottom-0 end-0 me-3 mb-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="themeToggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <span id="themeIcon"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-theme="light">
+                    <i class="bi bi-brightness-high"></i> Claro
+                </a></li>
+            <li><a class="dropdown-item" href="#" data-theme="dark">
+                    <i class="bi bi-moon"></i> Oscuro
+                </a></li>
+        </ul>
+    </div>
+    <footer class="bg-primary mt-5 py-5" style="--bs-bg-opacity:.7;">
+        <div class="container mt-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-5 ">
+                <div class="col d-flex flex-column justify-content-center align-items-center">
+                    <img class="d-block mx-auto" src="{% static 'app2/images/logo.png' %}" width="130" height="64"
+                        alt="">
+                    <p class="fs-4 text-white text-center">
+                        Divina Misericordia
+                    <p>
+                </div>
+                <div class="col d-flex flex-column justify-content-center align-items-center">
+                    <a class="text-decoration-none" href=#>
+                        <p class="text-white text-center">
+                            <i class="bi bi-instagram"></i>
+                            Visita nuestro Instagram
+                        </p>
+                    </a>
+                    <a class="text-decoration-none" href="#">
+                        <p class="text-white text-center">
+                            <i class="bi bi-whatsapp"></i>
+                            Visita nuestro Whatsapp
+                        </p>
+                    </a>
+                    <a class="text-decoration-none" href="#">
+                        <p class="text-white text-center">
+                            <i class="bi bi-envelope-at"></i>
+                            Visita nuestro correo Gmail
+                        </p>
+                    </a>
+
+                </div>
+                <div class="col d-flex flex-column justify-content-center align-items-center">
+                    <p class="text-white">Desarrollado por </p>
+                    <a class="text-decoration-none text-white" target="_blank"
+                        href="https://www.instagram.com/im_danieldev/">
+                        <p class="text-white"> Dickson vejar</p>
+                    </a>
+                    <a class="text-decoration-none text-white" target="_blank"
+                        href="https://www.instagram.com/deiby_vejar/">
+                        <p class="text-white"> Deiby vejar</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'app2/js/index.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

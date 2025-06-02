@@ -5,7 +5,8 @@ env/
 *.py[cod]
 __pycache__/
 
-# Base de datos y migraciones
+# Migraciones y base de datos
+**/migrations/
 *.sqlite3
 db.sqlite3
 */migrations/__pycache__/
@@ -26,6 +27,6 @@ db.sqlite3
 .vscode/
 .idea/
 
-# Archivos estáticos y media generados
+# Archivos generados
 staticfiles/
 media/

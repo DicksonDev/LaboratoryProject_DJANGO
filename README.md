@@ -105,31 +105,29 @@ Este proyecto es una aplicación web desarrollada con Django que permite al labo
 
 ## 📁 Estructura del Proyecto
 
+```
 LaboratoryProject_DJANGO/
-├── laboratorio/                 # Configuración principal del proyecto Django
+├── laboratorio/                  # Configuración principal del proyecto Django
 │   ├── __init__.py
 │   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── resultados/                  # Aplicación principal que maneja los resultados clínicos
-│         ├──static/
-│         ├──templates/
-├── admin.py
+├── resultados/                   # Aplicación principal que maneja los resultados clínicos
+│   ├── admin.py
 │   ├── apps.py
 │   ├── forms.py
-│   ├── migrations/
 │   ├── models.py
+│   ├── static/
+│   ├── templates/
 │   ├── tests.py
 │   ├── urls.py
 │   └── views.py
-├── media/                       # Archivos subidos por los usuarios (como exámenes)                    
+├── media/                        # Archivos subidos por los usuarios
 ├── .gitignore
 ├── manage.py
-└──requirements.txt
-
----
-
+└── requirements.txt
+```
 ## 📄 Licencia
 
 Este proyecto está licenciado bajo la [MIT License](LICENSE).

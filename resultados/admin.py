@@ -5,7 +5,8 @@ from .models import CustomUser, TipoExamen, MedicalResult
 # Personalización del UserAdmin
 
 
-@admin.register(CustomUser)
+@admin.register(CustomUser)  # Registramos el modelo CustomUser en el admin
+# Hacemos un CustomUserAdmin que hereda de UserAdmin ya que eliminamos campo username
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ('email', 'first_name', 'last_name',
@@ -14,15 +15,15 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
     search_fields = ('email', 'first_name', 'last_name')
 
-    # Como eliminaste username, tenemos que ajustar los campos que se muestran
-    fieldsets = (
+    # Como eliminamos username, tenemos que ajustar los campos que se muestran
+    fieldsets = (  # Edicion de usuario
         (None, {'fields': ('email', 'password')}),
         ('Información personal', {'fields': ('first_name', 'last_name')}),
         ('Permisos', {'fields': ('is_staff', 'is_active',
          'is_superuser', 'groups', 'user_permissions')}),
         ('Fechas importantes', {'fields': ('last_login', 'date_joined')}),
     )
-    add_fieldsets = (
+    add_fieldsets = (  # Creacion de usuario
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'first_name', 'last_name', 'password1', 'password2', 'is_staff', 'is_active')}
@@ -50,5 +51,6 @@ class MedicalResultAdmin(admin.ModelAdmin):
 
 
 admin.site.site_header = "Administración Divina Misericordia"
+# Perzonalicacion del panel administrativo
 admin.site.site_title = "Divina Misericordia Admin"
 admin.site.index_title = "Bienvenido al Panel de Administración"

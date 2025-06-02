@@ -2,9 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-User = get_user_model()  # Obtiene el modelo de usuario actual
+User = get_user_model()  # Obtiene el modelo de usuario actual es decir, CustomUser
 
 
+# Formulario personalizado para crear un nuevo usuario
 class CustomUserForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label="Nombre", widget=forms.TextInput(
         attrs={'placeholder': 'Nombre'}))
@@ -26,4 +27,5 @@ class CustomUserForm(UserCreationForm):
 
     class Meta:
         model = User  # Ahora usa el modelo `CustomUser`
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'password1',
+                  'password2')  # Campos que se mostrarán en el formulario

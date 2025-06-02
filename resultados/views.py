@@ -8,15 +8,14 @@ from django.contrib.auth.decorators import login_required
 from .models import MedicalResult
 from django.shortcuts import get_object_or_404
 
-
-def inicio(request):
-    return render(request, 'index.html')
-
-
 User = get_user_model()  # Obtiene el modelo de usuario actual
 
 
-def register(request):
+def inicio(request):  # Vista de inicio
+    return render(request, 'index.html')
+
+
+def register(request):  # Vista de registro
     if request.method == "POST":
         form = CustomUserForm(request.POST)
         if form.is_valid():
@@ -34,21 +33,21 @@ def register(request):
 
 
 @login_required
-def bienvenido(request):
+def bienvenido(request):  # Vista de bienvenida
     resultados = MedicalResult.objects.filter(
         user=request.user, eliminado=False)
     return render(request, 'cliente_vista.html', {'resultados': resultados})
 
 
 @login_required
-def eliminar_examen(request, pk):
+def eliminar_examen(request, pk):  # Endpoint para eliminar un examen
     examen = get_object_or_404(MedicalResult, pk=pk, user=request.user)
     examen.eliminado = True
     examen.save()
     return redirect('bienvenido')
 
 
-def signin(request):
+def signin(request):  # Vista de inicio de sesión
     storage = messages.get_messages(request)
     storage.used = True  # Limpia mensajes
 
@@ -80,6 +79,6 @@ def signin(request):
     return render(request, "login.html", {"form": form})
 
 
-def signout(request):
+def signout(request):  # Vista de cierre de sesión
     logout(request)
     return redirect('inicio')

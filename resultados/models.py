@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
-# 👤 UserManager personalizado
+# UserManager personalizado (eliminamos username y usamos email como identificador único)
 
 
 class CustomUserManager(BaseUserManager):
@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-# 👤 Modelo de usuario personalizado
+# Modelo de usuario personalizado
 
 
 class CustomUser(AbstractUser):
@@ -43,7 +43,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
-# 📄 Tipo de examen
+# Tipo de examen
 
 
 class TipoExamen(models.Model):
@@ -53,7 +53,7 @@ class TipoExamen(models.Model):
     def __str__(self):
         return f"{self.nombre}"
 
-# 📊 Resultados médicos
+# Resultados médicos
 
 
 class MedicalResult(models.Model):

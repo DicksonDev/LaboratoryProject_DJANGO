@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(k$+vi-il%oru%32v0gwu4s9tn-xbgd6i=v5$zo4jk@w3ir%#s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tostonconpussy.pythonanywhere.com']
 LOGIN_URL = '/login/'
 
 # Application definition
@@ -76,11 +76,17 @@ WSGI_APPLICATION = 'laboratorio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Base de datos
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # Base de datos
+        'NAME': 'tostonconpussy$default',
+        'USERNAME': 'tostonconpussy',
+        'PASSWORD': 'abcd20122052',
+        'HOST': 'tostonconpussy.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -123,6 +129,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "resultados", "static")  # Archivos estaticos
 ]
 
+# Raiz de los archivos estaticos
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -132,9 +141,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Aqui se guardaran los examenes
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.pythonanywhere.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "ejemplo@gmail.com"  # mi correo
-EMAIL_HOST_PASSWORD = "tupasswordhere"
+EMAIL_HOST_USER = "laboratoriodivinamisericordia2@gmail.com"  # mi correo
+EMAIL_HOST_PASSWORD = "aawwgndywdsafmoz"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

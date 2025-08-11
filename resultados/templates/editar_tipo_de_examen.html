@@ -64,6 +64,7 @@
 </head>
 
 <body>
+
     <header>
         <nav class="navbar navbar-expand-lg bg-primary navbar-dark" style="--bs-bg-opacity: .7;">
             <div class="container">
@@ -121,50 +122,26 @@
     </header>
 
     <main class="container my-5 pb-5">
-        <!-- Saludo -->
-        <p class="text-center fs-5 mb-1">
-            Hola, <strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong> 👋
-        </p>
-        <!-- Fecha y hora -->
-        <p class="text-center text-muted" id="fechaHoraActual"></p>
+        <div class="container my-5">
+            <h2 class="mb-4 text-center">Editar Tipo de Examen</h2>
 
-        <h2 class="text-center mb-4">Mis Exámenes Médicos</h2>
+            <form method="post">
+                {% csrf_token %}
 
-        {% if resultados %}
-        <div class="row row-cols-1 row-cols-md-3 g-3">
-            {% for resultado in resultados %}
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    {% if resultado.examen_Image %}
-                    <img src="{{ resultado.examen_Image.url }}" class="card-img-top" alt="Examen">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ resultado.tipoExamen.nombre }}</h5>
-                        <p class="card-text"><strong>Observaciones:</strong> {{ resultado.observaciones }}</p>
-                        <p class="card-text"><strong>Fecha:</strong> {{ resultado.fecha }}</p>
-                    </div>
-                    {% if resultado.examen_Image %}
-                    <div class="card-footer d-flex justify-content-between px-3">
-                        <form method="post" action="{% url 'eliminar_examen' resultado.pk %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger btn-sm"
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar este examen?')">
-                                <i class="bi bi-trash"></i> Eliminar
-                            </button>
-                        </form>
-
-                        <a href="{{ resultado.examen_Image.url }}" download class="btn btn-outline-primary btn-sm">
-                            <i class="bi bi-download"></i> Descargar
-                        </a>
-                    </div>
-                    {% endif %}
+                <div class="mb-3">
+                    <label for="id_nombre" class="form-label">Nombre del Tipo de Examen:</label>
+                    {{ form.nombre }}
                 </div>
-            </div>
-            {% endfor %}
+
+                <div class="mb-3">
+                    <label for="id_descripcion" class="form-label">Descripción:</label>
+                    {{ form.descripcion }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a href="{% url 'listar_tipos_examen' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
         </div>
-        {% else %}
-        <p class="text-center">No tienes exámenes disponibles por ahora.</p>
-        {% endif %}
     </main>
     <div class="dropdown position-fixed z-3 bottom-0 end-0 me-3 mb-3">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="themeToggle" data-bs-toggle="dropdown"

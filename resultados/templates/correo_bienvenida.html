@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f8fa;
+            color: #333333;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ logo_url }}" alt="Logo Divina Misericordia" class="logo" />
+    </div>
+    <div class="content">
+        <h2>Hola {{ nombre }},</h2>
+        <p>Gracias por registrarte en Divina Misericordia.</p>
+        <p>Estamos muy contentos de tenerte con nosotros.</p>
+        <a href="{% url 'bienvenido' %}" class="button">Iniciar sesión</a>
+    </div>
+</body>
+
+</html>

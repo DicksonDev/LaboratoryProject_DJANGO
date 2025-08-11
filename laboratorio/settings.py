@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-(k$+vi-il%oru%32v0gwu4s9tn-xbgd6i=v5$zo4jk@w3ir%#s
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_URL = '/login/'
 
 # Application definition
 
@@ -130,3 +130,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Aqui se guardaran los examenes
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "ejemplo@gmail.com"  # mi correo
+EMAIL_HOST_PASSWORD = "tupasswordhere"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

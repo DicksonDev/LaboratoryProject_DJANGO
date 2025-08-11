@@ -50,7 +50,7 @@ class MedicalResultAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user', 'tipoExamen']
 
 
-admin.site.site_header = "Administración Divina Misericordia"
 # Perzonalicacion del panel administrativo
+admin.site.site_header = "Administración Divina Misericordia"
 admin.site.site_title = "Divina Misericordia Admin"
 admin.site.index_title = "Bienvenido al Panel de Administración"

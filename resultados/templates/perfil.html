@@ -64,6 +64,7 @@
 </head>
 
 <body>
+
     <header>
         <nav class="navbar navbar-expand-lg bg-primary navbar-dark" style="--bs-bg-opacity: .7;">
             <div class="container">
@@ -121,50 +122,49 @@
     </header>
 
     <main class="container my-5 pb-5">
-        <!-- Saludo -->
-        <p class="text-center fs-5 mb-1">
-            Hola, <strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong> 👋
-        </p>
-        <!-- Fecha y hora -->
-        <p class="text-center text-muted" id="fechaHoraActual"></p>
+        <h2>Mi Perfil</h2>
 
-        <h2 class="text-center mb-4">Mis Exámenes Médicos</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+            <li class="list-group-item"><strong>Fecha de registro:</strong> {{ user.date_joined|date:"d/m/Y H:i" }}</li>
+            <li class="list-group-item"><strong>Exámenes obtenidos:</strong> {{ total_examenes }}</li>
+            <!-- Agrega más campos si quieres -->
+        </ul>
 
-        {% if resultados %}
-        <div class="row row-cols-1 row-cols-md-3 g-3">
-            {% for resultado in resultados %}
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    {% if resultado.examen_Image %}
-                    <img src="{{ resultado.examen_Image.url }}" class="card-img-top" alt="Examen">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ resultado.tipoExamen.nombre }}</h5>
-                        <p class="card-text"><strong>Observaciones:</strong> {{ resultado.observaciones }}</p>
-                        <p class="card-text"><strong>Fecha:</strong> {{ resultado.fecha }}</p>
-                    </div>
-                    {% if resultado.examen_Image %}
-                    <div class="card-footer d-flex justify-content-between px-3">
-                        <form method="post" action="{% url 'eliminar_examen' resultado.pk %}">
+        <form method="POST" action="{% url 'eliminar_cuenta' %}" class="mt-4"
+            onsubmit="return confirm('¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')">
+            {% csrf_token %}
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                Eliminar cuenta
+            </button>
+
+            <!-- Modal de confirmación -->
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="{% url 'eliminar_cuenta' %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger btn-sm"
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar este examen?')">
-                                <i class="bi bi-trash"></i> Eliminar
-                            </button>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteLabel">Confirmar eliminación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar cuenta</button>
+                            </div>
                         </form>
-
-                        <a href="{{ resultado.examen_Image.url }}" download class="btn btn-outline-primary btn-sm">
-                            <i class="bi bi-download"></i> Descargar
-                        </a>
                     </div>
-                    {% endif %}
                 </div>
             </div>
-            {% endfor %}
+        </form>
         </div>
-        {% else %}
-        <p class="text-center">No tienes exámenes disponibles por ahora.</p>
-        {% endif %}
     </main>
     <div class="dropdown position-fixed z-3 bottom-0 end-0 me-3 mb-3">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="themeToggle" data-bs-toggle="dropdown"

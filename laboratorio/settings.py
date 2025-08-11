@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'laboratorio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Base de datos
-        'NAME': 'tostonconpussy$default',
-        'USERNAME': 'tostonconpussy',
+        'NAME': 'LaboratorioDivin$default',
+        'USERNAME': 'LaboratorioDivin',
         'PASSWORD': 'abcd20122052',
-        'HOST': 'tostonconpussy.mysql.pythonanywhere-services.com',
+        'HOST': 'LaboratorioDivinaMisericordia.mysql.pythonanywhere-services.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
